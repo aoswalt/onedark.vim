@@ -1,49 +1,3 @@
-" Vim Color File
-" Name:       onedark.vim
-" Maintainer: https://github.com/joshdick/onedark.vim/
-" License:    The MIT License (MIT)
-" Based On:   https://github.com/MaxSt/FlatColor/
-
-" A companion [vim-airline](https://github.com/bling/vim-airline) theme is available at: https://github.com/joshdick/airline-onedark.vim
-
-" +-----------------+
-" | Color Reference |
-" +-----------------+
-
-" The following colors were measured inside Atom using its built-in inspector.
-
-" +---------------------------------------------+
-" |  Color Name  |         RGB        |   Hex   |
-" |--------------+--------------------+---------|
-" | Black        | rgb(40, 44, 52)    | #282c34 |
-" |--------------+--------------------+---------|
-" | White        | rgb(171, 178, 191) | #abb2bf |
-" |--------------+--------------------+---------|
-" | Light Red    | rgb(224, 108, 117) | #e06c75 |
-" |--------------+--------------------+---------|
-" | Dark Red     | rgb(190, 80, 70)   | #be5046 |
-" |--------------+--------------------+---------|
-" | Green        | rgb(152, 195, 121) | #98c379 |
-" |--------------+--------------------+---------|
-" | Light Yellow | rgb(229, 192, 123) | #e5c07b |
-" |--------------+--------------------+---------|
-" | Dark Yellow  | rgb(209, 154, 102) | #d19a66 |
-" |--------------+--------------------+---------|
-" | Blue         | rgb(97, 175, 239)  | #61afef |
-" |--------------+--------------------+---------|
-" | Magenta      | rgb(198, 120, 221) | #c678dd |
-" |--------------+--------------------+---------|
-" | Cyan         | rgb(86, 182, 194)  | #56b6c2 |
-" |--------------+--------------------+---------|
-" | Gutter Grey  | rgb(99, 109, 131)  | #636d83 |
-" |--------------+--------------------+---------|
-" | Comment Grey | rgb(92, 99, 112)   | #5c6370 |
-" +---------------------------------------------+
-
-" +----------------+
-" | Initialization |
-" +----------------+
-
 set background=dark
 
 highlight clear
@@ -56,19 +10,8 @@ set t_Co=256
 
 let g:colors_name="onedark"
 
-" Set to "256" for 256-color terminals, or
-" set to "16" to use your terminal emulator's native colors
-" (a 16-color palette for this color scheme is available; see
-" < https://github.com/joshdick/onedark.vim/blob/master/README.md >
-" for more information.)
-if !exists("g:onedark_termcolors")
-  let g:onedark_termcolors = 256
-endif
-
 " Not all terminals support italics properly. If yours does, opt-in.
-if !exists("g:onedark_terminal_italics")
-  let g:onedark_terminal_italics = 0
-endif
+let g:onedark_terminal_italics = 0
 
 " This function is based on one from FlatColor: https://github.com/MaxSt/FlatColor/
 " Which in turn was based on one found in hemisu: https://github.com/noahfrederick/vim-hemisu/
@@ -77,22 +20,12 @@ function! s:h(group, style)
     if has_key(a:style, "cterm") && a:style["cterm"] == "italic"
       unlet a:style.cterm
     endif
-    if has_key(a:style, "gui") && a:style["gui"] == "italic"
-      unlet a:style.gui
-    endif
   endif
-  if g:onedark_termcolors == 16
-    let l:ctermfg = (has_key(a:style, "fg") ? a:style.fg.cterm16 : "NONE")
-    let l:ctermbg = (has_key(a:style, "bg") ? a:style.bg.cterm16 : "NONE")
-  else
-    let l:ctermfg = (has_key(a:style, "fg") ? a:style.fg.cterm : "NONE")
-    let l:ctermbg = (has_key(a:style, "bg") ? a:style.bg.cterm : "NONE")
-  endif
+
+  let l:ctermfg = (has_key(a:style, "fg") ? a:style.fg.cterm : "NONE")
+  let l:ctermbg = (has_key(a:style, "bg") ? a:style.bg.cterm : "NONE")
+
   execute "highlight" a:group
-    \ "guifg="   (has_key(a:style, "fg")    ? a:style.fg.gui   : "NONE")
-    \ "guibg="   (has_key(a:style, "bg")    ? a:style.bg.gui   : "NONE")
-    \ "guisp="   (has_key(a:style, "sp")    ? a:style.sp.gui   : "NONE")
-    \ "gui="     (has_key(a:style, "gui")   ? a:style.gui      : "NONE")
     \ "ctermfg=" . l:ctermfg
     \ "ctermbg=" . l:ctermbg
     \ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
@@ -116,9 +49,9 @@ let s:purple = { "gui": "#C678DD", "cterm": "170", "cterm16": "5" } " Alternate 
 
 let s:cyan = { "gui": "#56B6C2", "cterm": "38", "cterm16": "6" } " Alternate cterm: 73
 
-let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+let s:white = { "gui": "#f0f0f0", "cterm": "7", "cterm16" : "7" }
 
-let s:black = { "gui": "#282C34", "cterm": "233", "cterm16": "0" }
+let s:black = { "gui": "#000000", "cterm": "0", "cterm16": "0" }
 let s:visual_black = { "gui": "NONE", "cterm": "NONE", "cterm16": s:black.cterm16 } " Black out selected text in 16-color visual mode
 
 let s:comment_grey = { "gui": "#5C6370", "cterm": "59", "cterm16": "15" }
@@ -187,7 +120,7 @@ call s:h("DiffChange", { "bg": s:visual_grey }) " diff mode: Changed line
 call s:h("DiffDelete", { "fg": s:red }) " diff mode: Deleted line
 call s:h("DiffText", { "bg": s:visual_grey, "fg": s:yellow }) " diff mode: Changed text within a changed line
 call s:h("ErrorMsg", {}) " error messages on the command line
-call s:h("VertSplit", { "fg": s:vertsplit }) " the column separating vertically split windows
+call s:h("VertSplit", { "fg": s:white }) " the column separating vertically split windows
 call s:h("Folded", { "fg": s:comment_grey }) " line used for closed folds
 call s:h("FoldColumn", {}) " 'foldcolumn'
 call s:h("SignColumn", {}) " column where signs are displayed
@@ -432,6 +365,17 @@ hi link gitcommitSelected gitcommitComment
 hi link gitcommitDiscardedArrow gitcommitDiscardedFile
 hi link gitcommitSelectedArrow gitcommitSelectedFile
 hi link gitcommitUnmergedArrow gitcommitUnmergedFile
+
+
+
+
+let g:indent_guides_enable_on_vim_startup = 1
+hi IndentGuidesOdd  ctermbg=233
+hi IndentGuidesEven ctermbg=234
+
+hi jsBlock ctermfg=150
+hi jsObjectKey ctermfg=139
+
 
 " +------------------------+
 " | Neovim terminal colors |

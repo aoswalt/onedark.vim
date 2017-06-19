@@ -3,13 +3,13 @@
 " This is a [lightline.vim](https://github.com/itchyny/lightline.vim) colorscheme for use with
 " the [onedark.vim](https://github.com/joshdick/onedark.vim) colorscheme.
 
-let s:black = [ '#282C34', 235 ]
+let s:black = [ '#000000', 0 ]
 let s:blue = [ '#61AFEF', 39 ]
 let s:green = [ '#98C379', 114 ]
 let s:grey = [ '#3E4452', 237 ]
 let s:purple = [ '#C678DD', 170 ]
 let s:red = [ '#E06C75', 204 ]
-let s:white = [ '#ABB2BF', 145 ]
+let s:white = [ '#f0f0f0', 7 ]
 let s:yellow = [ '#E5C07B', 180 ]
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
